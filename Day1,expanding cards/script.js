@@ -4,7 +4,7 @@ const panels = document.querySelectorAll('.panel');
 //The forEach() method calls a function once for each element in an array, in order.
 
 // panels.forEach(panel => {
-//     panel.addEventListener('click', () =>{
+//     panel.addEventListener('click', () => {
 //         panel.classList.add('active');
 //     })
 // })
@@ -13,16 +13,18 @@ const panels = document.querySelectorAll('.panel');
 //The classList property is read-only, however, you can modify it by using the add() and remove() methods.\
 //This example uses the addEventListener() method to attach a click event to a button.
 
-panels.forEach(panel => {
-    panel.addEventListener('click', () =>{
-        removeActiveClasses()
-        panel.classList.add('active');
+panels.forEach(pane => {
+    pane.addEventListener('click', () => {
+
+        removeActiveClasses();
+        pane.classList.add('active');
+
     })
 })
 
 function removeActiveClasses() {
-    panels.forEach(panel => {
-        panel.classList.remove('active')
+    panels.forEach(pane => {
+        pane.classList.remove('active')
     })
 }
 
