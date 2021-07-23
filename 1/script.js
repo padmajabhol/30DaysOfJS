@@ -158,11 +158,11 @@ var age = 28;
 //     console.log('John wins')
 // }
 
-if ( scoreJohn > scoreMike && scoreJohn > scoreMarry){
-    console.log('John wins')
-} else if (scoreMike > scoreJohn && scoreMike > scoreMarry){
-    console.log('marry wins')
-} else {
-    console.log('Marry wins')
-}
+// if ( scoreJohn > scoreMike && scoreJohn > scoreMarry){
+//     console.log('John wins')
+// } else if (scoreMike > scoreJohn && scoreMike > scoreMarry){
+//     console.log('marry wins')
+// } else {
+//     console.log('Marry wins')
+// }
 
