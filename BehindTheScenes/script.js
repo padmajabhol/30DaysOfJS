@@ -109,29 +109,80 @@
 
 // var firstName = "mATILDA";
 
-const jonas = {
-  firstName: "Jonas",
-  year: 1991,
-  calcAge: function () {
-    console.log(this);
-    console.log(2037 - this.year); //46
+// const jonas = {
+//   firstName: "Jonas",
+//   year: 1991,
+//   calcAge: function () {
+//     console.log(this);
+//     console.log(2037 - this.year); //46
 
-    // sol 1
-    // const self = this; //
-    // const isMil = function () {
-    //   console.log(this.year >= 1981 && this.year <= 1996);
-    // };
+//     // sol 1
+//     // const self = this; //
+//     // const isMil = function () {
+//     //   console.log(this.year >= 1981 && this.year <= 1996);
+//     // };
 
-    //sol 2 arrow functions uses the this keyword from its parent scope. in this case its jonas. it inherits the this keyword from its parents and doesnt give an error.
-    const isMil = () => {
-      console.log(this);
-      console.log(this.year >= 1981 && this.year <= 1996);
-    };
-    isMil();
-  },
+//     //sol 2 arrow functions uses the this keyword from its parent scope. in this case its jonas. it inherits the this keyword from its parents and doesnt give an error.
+//     const isMil = () => {
+//       console.log(this);
+//       console.log(this.year >= 1981 && this.year <= 1996);
+//     };
+//     isMil();
+//   },
 
-  greet: () => console.log(`Hey ${this.firstName}`),
+//   greet: () => console.log(`Hey ${this.firstName}`),
+// };
+
+// jonas.greet(); // hey undefined // hey matilda (since window object)
+// jonas.calcAge();
+
+//primitive vs objects
+
+// let age = 30;
+// let oldAge = age;
+// age = 31;
+// console.log(age);
+// console.log(oldAge);
+
+// const me = {
+//   name: "Jonas",
+//   age: 30,
+// };
+// const friend = me;
+// friend.age = 27;
+// console.log("Friend:", friend);
+// console.log("Me", me);
+
+//primitive types
+let lastName = "Williams";
+let oldLastName = lastName;
+lastName = "Davis";
+console.log(lastName, oldLastName); //davis williams
+
+//reference types
+const jessica = {
+  firstName: "Jessica",
+  lastName: "Williams",
+  age: 27,
+};
+const marriedJessica = jessica;
+marriedJessica.lastName = "Davis";
+console.log("before the marriage:", jessica);
+console.log("after the marriage", marriedJessica); //both davis
+
+//copying objs
+const jessica2 = {
+  firstName: "Jessica",
+  lastName: "Williams",
+  age: 27,
+  family: ["alice", "bob"],
 };
 
-jonas.greet(); // hey undefined // hey matilda (since window object)
-jonas.calcAge();
+const jessicsCopy = Object.assign({}, jessica2);
+jessicsCopy.lastName = "Davis";
+
+jessicsCopy.family.push("Mary");
+jessicsCopy.family.push("John");
+
+console.log("before the marriage:", jessica2);
+console.log("after the marriage", jessicsCopy);
