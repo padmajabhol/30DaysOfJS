@@ -91,6 +91,11 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`here is ur pasta ${ing1} ${ing2} ${ing3}`);
   },
+
+  orderpizza: function (mainIngrediant, ...otherIngrediant) {
+    console.log(mainIngrediant);
+    console.log(otherIngrediant);
+  },
 };
 
 // restaurant.orderDelivery({
@@ -136,46 +141,82 @@ const restaurant = {
 // } = openingHours;
 // console.log(o, c); //11,23
 
-//spead operator...
-//use to unpack an array elements at one
+// //spead operator...
+// //use to unpack an array elements at one
 
-const arr = [7, 8, 9];
-const badNewArr = [1, 2, ...arr];
-console.log(badNewArr); // 1,2,7,8,9
+// const arr = [7, 8, 9];
+// const badNewArr = [1, 2, ...arr];
+// console.log(badNewArr); // 1,2,7,8,9
 
-const newMenu = [...restaurant.mainMenu, "Gnocci"];
-console.log(newMenu); //["Pizza", "Pasta", "Risotto", "Gnocci"]
+// const newMenu = [...restaurant.mainMenu, "Gnocci"];
+// console.log(newMenu); //["Pizza", "Pasta", "Risotto", "Gnocci"]
 
-//copy array
-const mainMenuCopy = [...restaurant.mainMenu]; //["Pizza", "Pasta", "Risotto", "Gnocci"]
+// //copy array
+// const mainMenuCopy = [...restaurant.mainMenu]; //["Pizza", "Pasta", "Risotto", "Gnocci"]
 
-//join 2 arrays
-const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
-console.log(menu); //"Pizza", "Pasta", "Risotto", "Focaccia", "Brushhetta", "Gralic", "Bread", "Caprese Salad"
+// //join 2 arrays
+// const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+// console.log(menu); //"Pizza", "Pasta", "Risotto", "Focaccia", "Brushhetta", "Gralic", "Bread", "Caprese Salad"
 
-//iterables are arrays, strings, maps, sets. NOT objects
+// //iterables are arrays, strings, maps, sets. NOT objects
 
-const str = "Padmaja";
-const letters = [...str, "", "S."];
-console.log(letters); //["P", "a", "d", "m", "a", "j", "a", "", "S."]
-console.log(...str); //P a d m a j a
-// console.log(`${...str} sch`) //unexpected token, multiple values separated by a coma are usually only expected when we pass arguements into a function or build a new array
+// const str = "Padmaja";
+// const letters = [...str, "", "S."];
+// console.log(letters); //["P", "a", "d", "m", "a", "j", "a", "", "S."]
+// console.log(...str); //P a d m a j a
+// // console.log(`${...str} sch`) //unexpected token, multiple values separated by a coma are usually only expected when we pass arguements into a function or build a new array
 
-// const ingrediants = [
-//   prompt("Let's make pasta "),
-//   prompt("Ingrediant 2?"),
-//   prompt("ingrediant 3"),
-// ];
+// // const ingrediants = [
+// //   prompt("Let's make pasta "),
+// //   prompt("Ingrediant 2?"),
+// //   prompt("ingrediant 3"),
+// // ];
 
-// console.log(ingrediants);
+// // console.log(ingrediants);
 
-// restaurant.orderPasta(ingrediants[0], ingrediants[1], ingrediants[2]);
-// restaurant.orderPasta(...ingrediants); //same result as above very fun
+// // restaurant.orderPasta(ingrediants[0], ingrediants[1], ingrediants[2]);
+// // restaurant.orderPasta(...ingrediants); //same result as above very fun
 
-const newRest = { foundingIn: 1998, ...restaurant, founder: "monke" };
-console.log(newRest); //{foundingIn: 1998, name: "Classico Italiano", location: "Blah blah", categories: Array(4), starterMenu: Array(5), …}
+// const newRest = { foundingIn: 1998, ...restaurant, founder: "monke" };
+// console.log(newRest); //{foundingIn: 1998, name: "Classico Italiano", location: "Blah blah", categories: Array(4), starterMenu: Array(5), …}
 
-const restCopy = { ...restaurant };
-restCopy.name = "Rest nu";
-console.log(restCopy.name); //Rest nu
-console.log(restaurant.name); //Classico Italiano
+// const restCopy = { ...restaurant };
+// restCopy.name = "Rest nu";
+// console.log(restCopy.name); //Rest nu
+// console.log(restaurant.name); //Classico Italiano
+
+//REST PAttern //pack elements into an array
+//destructuring
+const arr = [1, 2, ...[3, 4]]; //spread because on right side
+
+const [a, b, ...others] = [1, 2, 3, 4, 5]; //rest pattern because on the left side
+console.log(a, b, others); //1 2 (3) [3, 4, 5]
+
+//rest patterns basically collects the elements that are unsused in an array
+
+const [pizza, , risotto, ...otherfood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+]; ////otherfood will collect the rest of the elements ao always placed at the end
+console.log(pizza, risotto, otherfood); //Pizza Risotto (5) ["Focaccia", "Brushhetta", "Gralic", "Bread", "Caprese Salad"]
+
+//rest pattern in objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays); //thu: {…}, fri: {…}}
+
+//functions rest syntax
+const add = function (...numbers) {
+  // console.log(numbers); //[2, 3] ,204 (4) [5, 3, 7, 2], 204 (7) [8, 2, 5, 3, 2, 1, 4]
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+  console.log(sum);
+};
+add(2, 3);
+add(5, 3, 7, 2);
+add(8, 2, 5, 3, 2, 1, 4);
+
+const x = [23, 5, 7];
+add(...x);
+
+restaurant.orderpizza("mushrooms", "onion", "olives", "spinach"); //first arguement was stored into main ingrediant, rest was stored into other ingrediants
+restaurant.orderpizza("mushroom"); //mushroom and an empty array
