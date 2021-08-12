@@ -185,38 +185,67 @@ const restaurant = {
 // console.log(restCopy.name); //Rest nu
 // console.log(restaurant.name); //Classico Italiano
 
-//REST PAttern //pack elements into an array
-//destructuring
-const arr = [1, 2, ...[3, 4]]; //spread because on right side
+// //REST PAttern //pack elements into an array
+// //destructuring
+// const arr = [1, 2, ...[3, 4]]; //spread because on right side
 
-const [a, b, ...others] = [1, 2, 3, 4, 5]; //rest pattern because on the left side
-console.log(a, b, others); //1 2 (3) [3, 4, 5]
+// const [a, b, ...others] = [1, 2, 3, 4, 5]; //rest pattern because on the left side
+// console.log(a, b, others); //1 2 (3) [3, 4, 5]
 
-//rest patterns basically collects the elements that are unsused in an array
+// //rest patterns basically collects the elements that are unsused in an array
 
-const [pizza, , risotto, ...otherfood] = [
-  ...restaurant.mainMenu,
-  ...restaurant.starterMenu,
-]; ////otherfood will collect the rest of the elements ao always placed at the end
-console.log(pizza, risotto, otherfood); //Pizza Risotto (5) ["Focaccia", "Brushhetta", "Gralic", "Bread", "Caprese Salad"]
+// const [pizza, , risotto, ...otherfood] = [
+//   ...restaurant.mainMenu,
+//   ...restaurant.starterMenu,
+// ]; ////otherfood will collect the rest of the elements ao always placed at the end
+// console.log(pizza, risotto, otherfood); //Pizza Risotto (5) ["Focaccia", "Brushhetta", "Gralic", "Bread", "Caprese Salad"]
 
-//rest pattern in objects
-const { sat, ...weekdays } = restaurant.openingHours;
-console.log(weekdays); //thu: {…}, fri: {…}}
+// //rest pattern in objects
+// const { sat, ...weekdays } = restaurant.openingHours;
+// console.log(weekdays); //thu: {…}, fri: {…}}
 
-//functions rest syntax
-const add = function (...numbers) {
-  // console.log(numbers); //[2, 3] ,204 (4) [5, 3, 7, 2], 204 (7) [8, 2, 5, 3, 2, 1, 4]
-  let sum = 0;
-  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
-  console.log(sum);
-};
-add(2, 3);
-add(5, 3, 7, 2);
-add(8, 2, 5, 3, 2, 1, 4);
+// //functions rest syntax
+// const add = function (...numbers) {
+//   // console.log(numbers); //[2, 3] ,204 (4) [5, 3, 7, 2], 204 (7) [8, 2, 5, 3, 2, 1, 4]
+//   let sum = 0;
+//   for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+//   console.log(sum);
+// };
+// add(2, 3);
+// add(5, 3, 7, 2);
+// add(8, 2, 5, 3, 2, 1, 4);
 
-const x = [23, 5, 7];
-add(...x);
+// const x = [23, 5, 7];
+// add(...x);
 
-restaurant.orderpizza("mushrooms", "onion", "olives", "spinach"); //first arguement was stored into main ingrediant, rest was stored into other ingrediants
-restaurant.orderpizza("mushroom"); //mushroom and an empty array
+// restaurant.orderpizza("mushrooms", "onion", "olives", "spinach"); //first arguement was stored into main ingrediant, rest was stored into other ingrediants
+// restaurant.orderpizza("mushroom"); //mushroom and an empty array
+
+console.log("---- OR ----");
+//short circuiting (&& and ||)
+console.log(3 || "jonas"); //3
+//use any data type , return any data type, do something called short circuiting
+//short circuiting means, if the first value is a truthy value then it will immediatedly return the first value , js will not even take a look at the second elemnt
+console.log("" || "jonas"); //jonas
+console.log(true || 0); //true
+console.log(undefined || null); //null , undefined is falsy value
+console.log(undefined || 0 || "" || "Hello" || 23 || null); //Hello
+
+restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1); //10
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+console.log("---- AND ----"); //the and sees if the first value is falsy and immediatedly returns that value without evaluating the second value
+console.log(0 && "jonas"); //0
+console.log(7 && "Jonas"); //'jonas' //when the first value is truthy, the second value is evaluated and returned if its true too
+console.log("Hello" && 23 && null && "jonas"); //null as its falsy and evaluation stops
+
+//practical example
+if (restaurant.orderpizza) {
+  restaurant.orderpizza("mushrooms", "spinach");
+}
+
+restaurant.orderpizza && restaurant.orderpizza("mushrooms", "spinach"); //if restaurant.orderpizza exists, its a truthy value so the opeartor moves to the next and prints it as its truthy value too. same as the above method
