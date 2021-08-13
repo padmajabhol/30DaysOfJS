@@ -445,30 +445,156 @@ const restaurant = {
   },
 };
 
-//OPTIONAL CHAINING
+// //OPTIONAL CHAINING
 
-if (restaurant.openingHours && restaurant.openingHours.mon)
-  console.log(restaurant.openingHours.mon.open);
+// if (restaurant.openingHours && restaurant.openingHours.mon)
+//   console.log(restaurant.openingHours.mon.open);
 
-//with optional chain
-console.log(restaurant.openingHours?.mon?.open);
-//if the property before ? doesnot exist it will give undefined, if it does then it will move to .open
+// //with optional chain
+// console.log(restaurant.openingHours?.mon?.open);
+// //if the property before ? doesnot exist it will give undefined, if it does then it will move to .open
 
-//example
-const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-for (const day of days) {
-  console.log(day); //will give each day separately
-  const open = restaurant.openingHours[day]?.open || "closed"; //use brackett notaion or else it wont work
-  console.log(`On ${day} , we open at ${open}`);
-}
+// //example
+// const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+// for (const day of days) {
+//   console.log(day); //will give each day separately
+//   const open = restaurant.openingHours[day]?.open || "closed"; //use brackett notaion or else it wont work
+//   console.log(`On ${day} , we open at ${open}`);
+// }
 
-//methods
+// //methods
 
-console.log(restaurant.order?.(0, 1) ?? "Method does not exist"); //order is a method that already exists, order risotto doesnt
-console.log(restaurant.orderRisotto?.address(0, 1) ?? "Method does not exist");
+// console.log(restaurant.order?.(0, 1) ?? "Method does not exist"); //order is a method that already exists, order risotto doesnt
+// console.log(restaurant.orderRisotto?.address(0, 1) ?? "Method does not exist");
 
-// console.log(restaurant.openingHours.mon.open); //doing this without the optional chain will give an error but with optional chain it will give undefined
+// // console.log(restaurant.openingHours.mon.open); //doing this without the optional chain will give an error but with optional chain it will give undefined
 
-//in arrays
-const users = [{ name: "jonas", email: "jonas.io" }];
-console.log(users[0]?.name ?? "User array empty");
+// //in arrays
+// const users = [{ name: "jonas", email: "jonas.io" }];
+// console.log(users[0]?.name ?? "User array empty");
+
+//looping objects
+
+// //propert names
+// const properties = Object.keys(openingHours);
+// console.log(properties); //(3) ["thu", "wed", "day-6"]
+// //console.log(`we are open on ${properties.length} days`);
+
+// let openStr = `we are open on ${properties.length} days:`;
+// for (const day of properties) {
+//   openStr += `${day},`;
+// }
+// console.log(openStr);
+
+// // for (const day of properties) {
+// //   console.log(day);
+// // }
+
+// //property values
+// const values = Object.values(openingHours);
+// console.log(values); //get all detail value opening hours, closing hours, etc
+
+//entries
+// const entries = Object.entries(openingHours);
+// console.log(entries);
+
+// for (const [key, { open, close }] of entries) {
+//   console.log(`on ${key} we open at ${open} and close at ${close}`);
+// }
+
+//coding challenge 2
+const game = {
+  team1: "Bayern Munich",
+  team2: "Borrussia Dortmund",
+  players: [
+    [
+      "Neuer",
+      "Pavard",
+      "Martinez",
+      "Alaba",
+      "Davies",
+      "Kimmich",
+      "Goretzka",
+      "Coman",
+      "Muller",
+      "Gnarby",
+      "Lewandowski",
+    ],
+    [
+      "Burki",
+      "Schulz",
+      "Hummels",
+      "Akanji",
+      "Hakimi",
+      "Weigl",
+      "Witsel",
+      "Hazard",
+      "Brandt",
+      "Sancho",
+      "Gotze",
+    ],
+  ],
+  score: "4:0",
+  scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
+  date: "Nov 9th, 2037",
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+// //1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+// for (const [i, player] of game.scored.entries())
+//   console.log(`goal ${i + 1}: ${player}`);
+
+// //2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+// const odds = Object.values(game.odds);
+// let average = 0;
+// for (const odd of odds) average += odd;
+// average /= odds.length; //(average = average/object...)
+// console.log(average);
+
+// // 3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
+// //       Odd of victory Bayern Munich: 1.33
+// //       Odd of draw: 3.25
+// //       Odd of victory Borrussia Dortmund: 6.5
+// // Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+
+// for (const [team, odd] of Object.entries(game.odds)) {
+//   const teamStr = team === "x" ? "draw" : `victory ${game[team]}`;
+//   console.log(`Odd of ${teamStr} ${odd}`);
+// }
+
+//sets
+
+const orderSet = new Set([
+  "Pasta",
+  "Pizza",
+  "Pizza",
+  "Risotto",
+  "Pasta",
+  "Pizza",
+]);
+
+console.log(orderSet);
+console.log(new Set("Jonas"));
+console.log(orderSet.size); //3
+console.log(orderSet.has("Pizza")); //to check if pizza is there, true
+console.log(orderSet.has("Bread")); //false
+orderSet.add("Garlic Bread");
+orderSet.add("Garlic Bread");
+orderSet.delete("Risotto");
+// orderSet.clear(); //to delete all the elements
+console.log(orderSet);
+
+for (const order of orderSet) console.log(order);
+
+const staff = ["waiter", "chef", "waiter", "manager", "chef", "waiter"];
+
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+console.log(
+  new Set(["Waiter", "Chef", "Waiter", "Manager", "Chef", "Waiter"]).size
+); //3
+console.log(new Set("PadmajaBhol").size); //9
