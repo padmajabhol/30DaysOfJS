@@ -568,14 +568,14 @@ const game = {
 
 // //sets
 
-// const orderSet = new Set([
-//   "Pasta",
-//   "Pizza",
-//   "Pizza",
-//   "Risotto",
-//   "Pasta",
-//   "Pizza",
-// ]);
+const orderSet = new Set([
+  "Pasta",
+  "Pizza",
+  "Pizza",
+  "Risotto",
+  "Pasta",
+  "Pizza",
+]);
 
 // console.log(orderSet);
 // console.log(new Set("Jonas"));
@@ -631,35 +631,277 @@ const game = {
 // console.log(rest.size); //0
 // console.log(rest.get(arr)); //test
 
-const question = new Map([
-  ["question", "what is the best programming lang in the world"],
-  [1, "C"],
-  [2, "Java"],
-  [3, "Javascript"],
-  ["correct", 3],
-  [true, "Correct 👍"],
-  [false, "try again 🤔"],
+// const question = new Map([
+//   ["question", "what is the best programming lang in the world"],
+//   [1, "C"],
+//   [2, "Java"],
+//   [3, "Javascript"],
+//   ["correct", 3],
+//   [true, "Correct 👍"],
+//   [false, "try again 🤔"],
+// ]);
+// console.log(question);
+
+// //convert object to map
+// console.log(Object.entries(openingHours));
+// const hoursMap = new Map(Object.entries(openingHours));
+// console.log(hoursMap);
+
+// //Quiz app
+// console.log(question.get("question"));
+// for (const [key, values] of question) {
+//   if (typeof key === "number") console.log(`Answer ${key}: ${values}`);
+// }
+
+// // const answer = Number(prompt("Your answer"));
+// const answer = 3;
+// console.log(answer);
+
+// console.log(question.get(question.get("correct") === answer));
+// //map back to an array
+// console.log([...question]);
+// console.log(...question.entries());
+// console.log(...question.entries());
+// console.log(...question.values());
+
+//DATA STRUCTURES OVERVIEW
+
+//simple list --> arrays or sets (when you dont need to describe the values)
+//key/valye pairs --> objects or maps
+
+//arrays vs sets
+// tasks = ["Code", "Eat", "Code"];
+// task = new Set(["Code", "Eat", "Code"]);
+
+//arrays --> when u need ordered list of values (might contain duplicates)
+//use when u need to manipulate data
+
+//sets --> use when u need to work with unique values
+//use when high performance is really important (operations like searing for an element or deleting an element from a set is x10 times faster than in arrays)
+//use to remove duplicates from arrays
+
+//object vs keys
+
+// task1 = {
+//   task: "Code",
+//   date: "today",
+//   repeat: true,
+// };
+
+// task2 = new Map([
+//   ["task", "Code"],
+//   ["date", "today"],
+//   [false, "Start coding"],
+// ]);
+
+//objects --> more traditional key/value store
+// easier to write and access values with . and  []
+//use when u need to include functions (methods)
+//use when working with JSON (can convert to map)
+
+//maps --> better performance
+//keys can have any data type
+//easy to iterate
+// easy to compute size
+//use when you simply need to map key to values
+//use when you need keys that are not strings
+
+//coding challenge #3
+
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
+GOOD LUCK 😀
+*/
+
+const gameEvents = new Map([
+  [17, "⚽️ GOAL"],
+  [36, "🔁 Substitution"],
+  [47, "⚽️ GOAL"],
+  [61, "🔁 Substitution"],
+  [64, "🔶 Yellow card"],
+  [69, "🔴 Red card"],
+  [70, "🔁 Substitution"],
+  [72, "🔁 Substitution"],
+  [76, "⚽️ GOAL"],
+  [80, "⚽️ GOAL"],
+  [92, "🔶 Yellow card"],
 ]);
-console.log(question);
 
-//convert object to map
-console.log(Object.entries(openingHours));
-const hoursMap = new Map(Object.entries(openingHours));
-console.log(hoursMap);
+// //1.
+// const events = [...new Set(gameEvents.values())]; //use set to create unique values
+// console.log(events);
 
-//Quiz app
-console.log(question.get("question"));
-for (const [key, values] of question) {
-  if (typeof key === "number") console.log(`Answer ${key}: ${values}`);
+// //2.
+// gameEvents.delete(64);
+
+// //3.
+// console.log(
+//   `An event happened, on average, every ${90 / gameEvents.size} minutes`
+// );
+// const time = [...gameEvents.keys()].pop(); //pop() will take the last element out of an array and give it to us
+// console.log(time); //convert keys to an array
+
+// //4.
+// for (const [min, event] of gameEvents) {
+//   const half = min <= 45 ? "FIRST" : "SECOND";
+//   console.log(`[${half} HALF] ${min}: ${events}`);
+// }
+
+//WORKING WITH STRINGS PART-1
+
+const airline = "TAP Air Portugal";
+const plane = "A320";
+
+console.log(plane[0]); //A
+console.log(plane[1]); //3
+console.log(plane[2]); //2
+
+console.log("B737"[0]); //B
+console.log(airline.length);
+console.log("B737".length); //4
+
+console.log(airline.indexOf("r")); //6
+console.log(airline.lastIndexOf("r")); //10
+console.log(airline.indexOf("Portugal")); //8 //case sensitive, if u search with lower case , u ll get -1
+console.log(airline.slice(4)); // Air Portugal (A is in the 4th position)
+console.log(airline.slice(4, 7)); //Air (Portugal is not included)
+
+// console.log(airline.slice(0, airline.indexOf("")));
+// console.log(airline.slice(airline.lastIndexOf("")));
+
+console.log(airline.slice(-2)); //negative end parameter
+console.log(airline.slice(1, -2)); // AP AIR PORTUG // -2 cuts off the last parameter
+
+const checkMiddleSeat = function (seat) {
+  //B and E are middle seats
+  const s = seat.slice(-1); //to take the last character of the string
+  if (s === "B" || s === "E") console.log("You got the middle seat 🤣");
+  else console.log("You got lucky 😎");
+};
+
+checkMiddleSeat("11B");
+checkMiddleSeat("23C");
+checkMiddleSeat("3E");
+
+console.log(new String("jonas"));
+console.log(typeof new String("Jonas")); //whenever u call a method with a string, javascript converts it to an object
+console.log(typeof new String("Jonas").slice(1)); //string
+
+//Part2
+
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+console.log("padmaja".toUpperCase());
+
+//fix capitalization in name
+
+const passenger = "jOnAs"; //Jonas
+const passengerLower = passenger.toLowerCase();
+console.log(passenger.slice(1)); //Onas
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect); //Jonas
+
+//comparing email
+const email = "hello@jonas.io";
+const loginEmail = " Hello@Jonas.Io \n";
+const lowerEmail = loginEmail.toLowerCase();
+console.log(lowerEmail); //hello@jonas.io (with white space)
+const trimmedEmail = lowerEmail.trim();
+console.log(trimmedEmail); //hello@jonas.io
+
+//all in one step
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail); //hello@jonas.io
+console.log(email === normalizedEmail);
+
+//replacing
+const priceGB = "288,97£";
+const priceUS = priceGB.replace("£", "$").replace(",", ".");
+console.log(priceUS);
+
+const annoucement =
+  "All passengers come to barding  door 23. Boarding door 23!";
+
+console.log(annoucement.replace("door", "gate")); //All passengers come to barding  gate 23. Boarding door 23!
+
+//to replace globally
+console.log(annoucement.replace(/door/g, "gate"));
+
+//Booleans
+const plane1 = "Airbus A320neo";
+console.log(plane1.includes("A320")); //true
+console.log(plane1.includes("Boeing")); //false
+console.log(plane1.startsWith("Air")); //true
+
+if (plane1.startsWith("Airbus") && plane1.endsWith("neo")) {
+  console.log("Part of the NEW ARirbus family");
 }
 
-// const answer = Number(prompt("Your answer"));
-const answer = 3;
-console.log(answer);
+//Practice exercise
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+  if (baggage.includes("knife") || baggage.includes("gun")) {
+    console.log("You are NOT allowed on board");
+  } else {
+    console.log("welcome aboard");
+  }
+};
+checkBaggage("I have a laptop, some Food and a pocket Knife");
+checkBaggage("Socks and camera");
+checkBaggage("Got some snacks and a gun for protection");
 
-console.log(question.get(question.get("correct") === answer));
-//map back to an array
-console.log([...question]);
-console.log(...question.entries());
-console.log(...question.entries());
-console.log(...question.values());
+//part-3
+
+//split and join
+console.log("a+very+nice+string".split("+")); //["a", "very", "nice", "string"]
+console.log("Padmaja Bhol".split(" ")); //["Padmaja", "Bhol"]
+
+const [firstName, lastName] = "Jonas Schmedtmann".split(" ");
+
+const newName = ["Mr.", firstName, lastName.toUpperCase()].join(" ");
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(" ");
+  const namesUpper = [];
+
+  for (const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(" "));
+};
+
+capitalizeName("jesicca annsmith davis");
+capitalizeName("padmaja bhol");
+
+//Padding
+
+const message1 = "Go to gate 23";
+console.log(message1.padStart(25, "+").padEnd(30, "+")); //++++++++++++Go to gate 23+++++
+console.log("Jonas".padStart(25, "+")); //++++++++++++++++++++Jonas
+
+const maskCreditCard = function (number) {
+  const str = number + "";
+  const last = str.slice(-4);
+  return last.padStart(str.length, "*");
+};
+
+console.log(maskCreditCard(4334235436547)); //*********6547
+
+//Repeat
+
+const message2 = "Bad weather... All Depatures Delayed...";
+console.log(message2.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${"✈".repeat(n)}`);
+};
+
+planesInLine(5); //There are 5 planes in line ✈✈✈✈✈
