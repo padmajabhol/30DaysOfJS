@@ -77,30 +77,46 @@
 
 //FUNCTIONS ACCEPTING CALLBACK FUNCTIONS
 
-const oneWord = function (str) {
-  return str.replace(/ /g, "").toLowerCase();
-};
+// const oneWord = function (str) {
+//   return str.replace(/ /g, "").toLowerCase();
+// };
 
-const upperFirstWord = function (str) {
-  const [first, ...others] = str.split(" ");
-  return [first.toUpperCase(), ...others].join(" ");
-};
+// const upperFirstWord = function (str) {
+//   const [first, ...others] = str.split(" ");
+//   return [first.toUpperCase(), ...others].join(" ");
+// };
 
-//higher-order fn
-const transformer = function (str, fn) {
-  console.log(`Original string: ${str}`);
-  console.log(`Transformed string: ${fn(str)}`);
-  console.log(`Transformed by: ${fn.name}`); //name of the function
-};
+// //higher-order fn
+// const transformer = function (str, fn) {
+//   console.log(`Original string: ${str}`);
+//   console.log(`Transformed string: ${fn(str)}`);
+//   console.log(`Transformed by: ${fn.name}`); //name of the function
+// };
 
-transformer("JS is the best", upperFirstWord);
-transformer("JS is the best", oneWord);
+// transformer("JS is the best", upperFirstWord);
+// transformer("JS is the best", oneWord);
 
-//JS uses callbacks all the time
-const high5 = function () {
-  console.log("🙋🏻‍♀️");
-};
+// //JS uses callbacks all the time
+// const high5 = function () {
+//   console.log("🙋🏻‍♀️");
+// };
 
-document.body.addEventListener("click", high5); //high5 is the callback function, addeventlistener is the higher order function
+// document.body.addEventListener("click", high5); //high5 is the callback function, addeventlistener is the higher order function
 
-["Jonas", "Martha", "Adam"].forEach(high5); //for each of them the callback function will be called (3)🙋🏻‍♀️
+// ["Jonas", "Martha", "Adam"].forEach(high5); //for each of them the callback function will be called (3)🙋🏻‍♀️
+
+//FUNCTIONS RETURNING FUNCTIONS
+
+// const greet = function (greeting) {
+//   return function (name) {
+//     console.log(`${greeting} ${name}`);
+//   };
+// };
+
+const greet = greeting => name => console.log(`${greeting} ${name}`);
+
+const greeterHey = greet("Hey");
+greeterHey("Jonas"); //Hey Jonas
+greeterHey("Steven"); //Hey Steven
+
+greet("Hello")("Padmaja"); //Hello Padmaja
