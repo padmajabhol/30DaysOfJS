@@ -28,22 +28,22 @@
 
 //HOW PASSING ARGUEMENTS WORKS: VALUE VS. REFERENCES
 
-const flight = "LH234";
-const jonas = {
-  name: "Jonas",
-  passport: 123456789,
-};
+// const flight = "LH234";
+// const jonas = {
+//   name: "Jonas",
+//   passport: 123456789,
+// };
 
-const checkIn = function (flightNum, passenger) {
-  flightNum = "LH999";
-  passenger.name = "Mr. " + passenger.name;
+// const checkIn = function (flightNum, passenger) {
+//   flightNum = "LH999";
+//   passenger.name = "Mr. " + passenger.name;
 
-  if (passenger.passport === 123456789) {
-    alert("Checked In");
-  } else {
-    alert("Wrong Password");
-  }
-};
+//   if (passenger.passport === 123456789) {
+//     alert("Checked In");
+//   } else {
+//     alert("Wrong Password");
+//   }
+// };
 
 // checkIn(flight, jonas);
 // console.log(flight);
@@ -53,14 +53,54 @@ const checkIn = function (flightNum, passenger) {
 // const flightNum = flight;
 // const passenger = jonas;
 
-const newPassport = function (person) {
-  person.passport = Math.trunc(Math.random() * 1000000);
-};
+// const newPassport = function (person) {
+//   person.passport = Math.trunc(Math.random() * 1000000);
+// };
 
-newPassport(jonas);
-checkIn(flight, jonas);
+// newPassport(jonas);
+// checkIn(flight, jonas);
 
 //passing by value, passing by reference
 //js doesnot have passing by reference , only passing by value
 
 //First Class function & higher-order functions
+
+//-js trats functions as first-class citizens
+//-functions are simply values
+//-functions are just another "type" of object
+
+//-higher order function that receives another function as an arguement, that returns a new function or both.
+//this is only possible because of first-class functions
+
+//-first-class means all functions are values, its just an concept, not a practice.
+//-HO functions are in practice but because of first class functions
+
+//FUNCTIONS ACCEPTING CALLBACK FUNCTIONS
+
+const oneWord = function (str) {
+  return str.replace(/ /g, "").toLowerCase();
+};
+
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(" ");
+  return [first.toUpperCase(), ...others].join(" ");
+};
+
+//higher-order fn
+const transformer = function (str, fn) {
+  console.log(`Original string: ${str}`);
+  console.log(`Transformed string: ${fn(str)}`);
+  console.log(`Transformed by: ${fn.name}`); //name of the function
+};
+
+transformer("JS is the best", upperFirstWord);
+transformer("JS is the best", oneWord);
+
+//JS uses callbacks all the time
+const high5 = function () {
+  console.log("🙋🏻‍♀️");
+};
+
+document.body.addEventListener("click", high5); //high5 is the callback function, addeventlistener is the higher order function
+
+["Jonas", "Martha", "Adam"].forEach(high5); //for each of them the callback function will be called (3)🙋🏻‍♀️
