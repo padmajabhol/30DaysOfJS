@@ -113,10 +113,62 @@
 //   };
 // };
 
-const greet = greeting => name => console.log(`${greeting} ${name}`);
+// const greet = greeting => name => console.log(`${greeting} ${name}`);
 
-const greeterHey = greet("Hey");
-greeterHey("Jonas"); //Hey Jonas
-greeterHey("Steven"); //Hey Steven
+// const greeterHey = greet("Hey");
+// greeterHey("Jonas"); //Hey Jonas
+// greeterHey("Steven"); //Hey Steven
 
-greet("Hello")("Padmaja"); //Hello Padmaja
+// greet("Hello")("Padmaja"); //Hello Padmaja
+
+//THE CALL AND APPLY METHOD
+
+const airIndia = {
+  airline: "AirIndia",
+  iataCode: "LH",
+  bookings: [],
+  //book: function(){}
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+airIndia.book(239, "Jonas");
+airIndia.book(543, "John Smith");
+console.log(airIndia);
+
+const eurowings = {
+  airline: "Eurowings",
+  iataCode: "EW",
+  bookings: [],
+};
+
+const book = airIndia.book; //book is now just a regular function so the this keyword inside of it will now point to undefined
+
+//DOES NOT WORK
+// book(23, "Sarah Williams"); //Cannot read property 'airline' of undefined
+
+//functions are really just objects, objects can have methods attached to them so do functions
+
+//call method
+book.call(eurowings, 23, "Sarah Williams"); //Sarah Williams booked a seat on Eurowings flight EW23
+
+book.call(airIndia, 239, "Mary Copper"); //Mary Copper booked a seat on AirIndia flight LH239
+
+const swiss = {
+  airline: "Swiss Air Lines",
+  iataCode: "LX",
+  bookings: [],
+};
+
+book.call(swiss, 34, "Padmaja Bhol"); //Padmaja Bhol booked a seat on Swiss Air Lines flight LX34
+
+//Apply method
+//it does not recieve a list of arguements after the this keyword but takes an array of arguements
+const flightData = [583, "George Cooper"];
+book.apply(swiss, flightData); //George Cooper booked a seat on Swiss Air Lines flight LX583
+
+book.call(swiss, ...flightData); //George Cooper booked a seat on Swiss Air Lines flight LX583 , same as above
