@@ -291,25 +291,85 @@ GOOD LUCK 😀
 
 //func that disappears when called once
 
-const runOnce = function () {
-  console.log("This will run again");
+// const runOnce = function () {
+//   console.log("This will run again");
+// };
+// runOnce();
+
+// runOnce();
+
+// //IIFE
+// (function () {
+//   console.log("This will never run again");
+//   const isPrivate = 23;
+// })();
+
+// (() => console.log("This will never run again"))();
+
+// {
+//   const isPrivate = 23;
+//   var notPrivate = 46;
+// }
+
+// // console.log(isPrivate); //not accesible
+// console.log(notPrivate); //accessible, var ignores block
+
+//CLOSURES
+
+// const secureBooking = function () {
+//   let passengerCount = 0;
+
+//   return function () {
+//     passengerCount++;
+//     console.log(`${passengerCount} passengers`);
+//   };
+// };
+
+// const booker = secureBooking();
+// booker(); //1 passengers
+// booker(); // 2 passengers , it updates the secureBooking function with the help of closures
+
+// console.dir(booker);
+
+// example 1
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
 };
-runOnce();
 
-runOnce();
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
 
-//IIFE
-(function () {
-  console.log("This will never run again");
-  const isPrivate = 23;
-})();
+g();
+f(); //47
 
-(() => console.log("This will never run again"))();
+//re-assigning f function
+h();
+f(); //1554
 
-{
-  const isPrivate = 23;
-  var notPrivate = 46;
-}
+//example 2
 
-// console.log(isPrivate); //not accesible
-console.log(notPrivate); //accessible, var ignores block
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`we are now boarding all ${n} passengers`);
+    console.log(`there are 3 groups, each with ${perGroup} passengers`);
+  }, 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+// setTimeout(function () {
+//   console.log("TIMER");
+// }, 5000); //TIMER APPEARS AFTER 5SEC
+const perGroup = 1000; // wont work first
+boardPassengers(180, 3);
