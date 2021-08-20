@@ -172,3 +172,63 @@ const flightData = [583, "George Cooper"];
 book.apply(swiss, flightData); //George Cooper booked a seat on Swiss Air Lines flight LX583
 
 book.call(swiss, ...flightData); //George Cooper booked a seat on Swiss Air Lines flight LX583 , same as above
+
+//Bind method
+const bookEw = book.bind(eurowings);
+const bookSW = book.bind(swiss);
+const bookAI = book.bind(airIndia);
+bookEw(23, "Steven Williams");
+
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23("Padmaja Bhol");
+bookEW23("Sonak");
+
+//Event listeners
+
+swiss.planes = 300;
+swiss.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+swiss.buyPlane();
+document
+  .querySelector(".buy")
+  .addEventListener("click", swiss.buyPlane.bind(swiss));
+
+//partial application
+
+// const addTax = (rate, value) => value + value * rate;
+// console.log(addTax(0.1, 200));
+
+// const addVAT = addTax.bind(null, 0.23);
+// (rate, value) => value + value * rate;
+
+// const addVAT = addTax.bind(null, 0.23);
+
+// console.log(addVAT(100));
+// console.log(addVAT(190));
+
+//function calling functions
+// const greet = function (greeting) {
+//   return function (name) {
+//     console.log(`${greeting} ${name}`);
+//   };
+// };
+
+// const greet = greeting => name => console.log(`${greeting} ${name}`);
+
+// const greeterHey = greet("Hey");
+// greeterHey("Jonas"); //Hey Jonas
+// greeterHey("Steven"); //Hey Steven
+
+// greet("Hello")("Padmaja"); //Hello Padmaja
+
+const addTax1 = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const addVAT1 = addTax1(0.23); //RATE
+console.log(addVAT1(100)); //value, 123
