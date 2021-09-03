@@ -431,7 +431,7 @@ const restaurant = {
 
   orderDelivery({ starterIndex, mainIndex, time, address }) {
     console.log(
-      `order recieved! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+      `order recieved! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`,
     );
   },
 
@@ -940,7 +940,7 @@ document.querySelector("button").addEventListener("click", function () {
     // console.log(row, first, second);
     const output = `${first}${second.replace(
       second[0],
-      second[0].toUpperCase()
+      second[0].toUpperCase(),
     )}`;
     console.log(`${output.padEnd(20)}${"😚".repeat(i + 1)}`);
   }
@@ -959,10 +959,10 @@ for (const flight of flights.split("+")) {
   // console.log(type);
   const output = `${type.startsWith("_Delayed") ? "🔴 " : ""} ${type.replaceAll(
     "_",
-    " "
+    " ",
   )} from ${getCode(from)} to ${getCode(to)} (${time.replace(
     ":",
-    "h"
+    "h",
   )})`.padStart(56);
   console.log(output);
 }
