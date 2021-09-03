@@ -65,12 +65,6 @@ const inputClosePin = document.querySelector(".form__input--pin");
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ["USD", "United States dollar"],
-  ["EUR", "Euro"],
-  ["GBP", "Pound sterling"],
-]);
-
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,3 +130,25 @@ movements.forEach(function (mov, index, array) {
 //1: function(450);
 
 //forEach loop will through the entire array but when we need to break through an array, we use for of method
+
+//FOREACH WITH MAPS AND SETS
+
+//MAP
+const currencies = new Map([
+  ["USD", "United States dollar"],
+  ["EUR", "Euro"],
+  ["GBP", "Pound sterling"],
+]);
+
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+//SET
+console.log("SETS");
+const currenciesUnique = new Set(["USD", "GBP", "USD", "EUR", "EUR"]);
+console.log(currenciesUnique);
+currenciesUnique.forEach(function (value, _, sets) {
+  console.log(`${value}: ${value}`); //_ same as value here
+});
+//there's no key value in sets so the key parameter doesnt make any sense
