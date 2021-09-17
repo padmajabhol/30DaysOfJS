@@ -61,6 +61,34 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map(name => name[0])
+      .join("");
+  });
+};
+
+createUsernames(accounts);
+console.log(accounts);
+
+//   const username = user
+//     .toLowerCase()
+//     .split(" ")
+//     .map(name => name[0])
+//     .join("");
+
+//   return username;
+// };
+
+// console.log(createUsernames("Steven Thomas Williams"));
+
+// const user = "Steven Thomas William";
+
+// console.log(username);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -192,28 +220,46 @@ GOOD LUCK 😀
 
 //MAP METHOD
 
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// const eurToUsd = 1.1;
+
+// // const movementsUSD = movements.map(function (mov) {
+// //   // return mov * eurToUsd;
+// //   return 23; //[23, 23, 23, 23, 23, 23, 23, 23]
+// // });
+
+// const movementsUSD = movements.map(mov => mov * eurToUsd);
+
+// console.log(movements);
+// console.log(movementsUSD);
+
+// const movementsUSDfor = [];
+// for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+// console.log(movementsUSDfor);
+
+// const movementsDiscriptions = movements.map(
+//   (mov, i) =>
+//     `Movements ${i + 1}: You ${mov > 0 ? "deposited" : "withdrew"}
+//     ${Math.abs(mov)}`,
+// );
+
+// console.log(movementsDiscriptions);
+
+//FILTER METHOD
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-const eurToUsd = 1.1;
-
-// const movementsUSD = movements.map(function (mov) {
-//   // return mov * eurToUsd;
-//   return 23; //[23, 23, 23, 23, 23, 23, 23, 23]
-// });
-
-const movementsUSD = movements.map(mov => mov * eurToUsd);
-
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
 console.log(movements);
-console.log(movementsUSD);
+console.log(deposits);
 
-const movementsUSDfor = [];
-for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
-console.log(movementsUSDfor);
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+console.log(depositsFor);
 
-const movementsDiscriptions = movements.map(
-  (mov, i) =>
-    `Movements ${i + 1}: You ${mov > 0 ? "deposited" : "withdrew"} 
-    ${Math.abs(mov)}`,
-);
+const withdrawals = movements.filter(mov => mov < 0);
 
-console.log(movementsDiscriptions);
+console.log(withdrawals);
