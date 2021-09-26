@@ -439,7 +439,6 @@ TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
 TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
-
 /*
 const calcAverageHumanAge = ages =>
   ages
@@ -451,6 +450,8 @@ const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);
 ///////////////////////////////////////
+
+
 // The find Method
 const firstWithdrawal = movements.find(mov => mov < 0);
 console.log(movements);
@@ -666,3 +667,48 @@ console.log(dogs.filter(checkEatingOkay));
 const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
 console.log(dogsSorted);
 */
+
+//chaining
+
+let arr = ["a", "b", "c", "d", "e"];
+
+//slice method
+console.log(arr.slice(2)); //cde
+console.log(arr.slice(2, 4)); //cd
+console.log(arr.slice(-2)); //de
+console.log(arr.slice(-1)); //e
+console.log(arr.slice(1, -2)); //bc till b except last 2
+console.log(arr.slice());
+console.log([...arr]);
+
+// splice
+// console.log(arr.splice(2)); //cde
+arr.splice(-1);
+arr.splice(1, 2);
+console.log(arr); // mutates the original array
+
+//REVERSE
+
+arr = ["a", "b", "c", "d", "e"];
+const arr2 = ["j", "i", "h", "g", "f"];
+console.log(arr2.reverse());
+console.log(arr2); //reverse does mutate the array
+
+//concat
+const letters = arr.concat(arr2);
+console.log(letters);
+console.log([...arr, ...arr2]);
+
+//JOIN
+console.log(letters.join("-"));
+
+//FIND METHOD
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(movements);
+console.log(firstWithdrawal); //-400
+// filter returns all the elements that matches the CSSConditionRule, find returns the first onemptied, filter returns new Array, find returns element itself
+
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === "Jessica Davis");
+console.log(account); //jessica
