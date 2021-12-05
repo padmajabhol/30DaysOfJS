@@ -251,3 +251,19 @@ btnSort.addEventListener("click", function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+//conversion
+console.log(Number("23"));
+console.log(+"23");
+
+// parsing
+console.log(Number.parseInt("30px", 10)); //base 10
+console.log(Number.parseInt("e23", 10));
+
+console.log(Number.parseFloat("2.5rem"));
+
+console.log(Number.isNaN(20)); //NotaNumber
+console.log(Number.isNaN(+"20x")); //true
+
+//best way of checking if a value is a number
+console.log(Number.isFinite(20));
