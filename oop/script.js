@@ -20,3 +20,16 @@ const jack = new Person("Jack", 1975);
 console.log(matilda, jack);
 
 console.log(jonas instanceof Person);
+
+//prototype
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+jonas.calcAge();
+
+Person.prototype.species = "Home Sapiens";
+console.log(jonas.species, matilda.species);
+
+console.log(jonas.hasOwnProperty("firstName"));
+console.log(jonas.hasOwnProperty("species"));
