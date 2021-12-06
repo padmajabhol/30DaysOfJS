@@ -253,17 +253,41 @@ btnSort.addEventListener("click", function (e) {
 // LECTURES
 
 //conversion
-console.log(Number("23"));
-console.log(+"23");
+// console.log(Number("23"));
+// console.log(+"23");
 
-// parsing
-console.log(Number.parseInt("30px", 10)); //base 10
-console.log(Number.parseInt("e23", 10));
+// // parsing
+// console.log(Number.parseInt("30px", 10)); //base 10
+// console.log(Number.parseInt("e23", 10));
 
-console.log(Number.parseFloat("2.5rem"));
+// console.log(Number.parseFloat("2.5rem"));
 
-console.log(Number.isNaN(20)); //NotaNumber
-console.log(Number.isNaN(+"20x")); //true
+// console.log(Number.isNaN(20)); //NotaNumber
+// console.log(Number.isNaN(+"20x")); //true
 
-//best way of checking if a value is a number
-console.log(Number.isFinite(20));
+// //best way of checking if a value is a number
+// console.log(Number.isFinite(20));
+
+// math and rounding
+console.log(Math.sqrt(25));
+
+console.log(8 ** (1 / 3));
+
+console.log(Math.max(5, 18, 23, 11));
+
+console.log(Math.PI * Number.parseFloat("10") ** 2);
+
+console.log(Math.trunc(Math.random() * 6) + 1);
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min) + 1) + min;
+console.log(randomInt(5, 20));
+
+//rounding numbers
+
+console.log(Math.trunc(23.3));
+console.log(Math.round(23.3));
+console.log(Math.floor(23.3));
+
+// rounding decimals
+console.log((2.7).toFixed(0));
