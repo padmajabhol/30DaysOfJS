@@ -6,6 +6,32 @@ const Person = function (firstName, birthYear) {
   this.birthYear = birthYear;
 };
 
+// Person.proptype.calcAge = function () {
+//   console.log(2037 - this.birthYear);
+// };
+
+const Student = function (firstName, birthName, course) {
+  Person.call(this, firstName, birthName);
+  this.course = course;
+};
+
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const mike = new Student("Mike", 2020, "Computer Science");
+mike.introduce();
+
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.dir(Student.prototype.constructor);
+
+console.log(mike);
+
 const jonas = new Person("Jonas", 1991);
 
 console.log(jonas);
@@ -118,6 +144,16 @@ class PersonCl {
     console.log(this);
   }
 }
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthName, course) {
+    // Always needs to happen first!
+    super(fullName, birthName);
+    this.course = course;
+  }
+}
+
+const martha = new StudentCl("Martha Jones", 2012, "Computer Science");
 
 const jessica = new PersonCl("Jessica Davis", 1996);
 console.log(jessica);
@@ -233,3 +269,103 @@ ford.accelerate();
 ford.brake();
 ford.speedUS = 50;
 console.log(ford);
+
+// const steven = Object.create(PersonProto);
+// const StudentProto = Object.create(PersonProto);
+// StudentProto.init = function (firstName, birthYear, course) {
+//   PersonProto.init.call(this, firstName, birthYear);
+//   this.course = course;
+// };
+
+// StudentProto.introduce = function () {
+//   console.log(`My name is ${this.fullName} and I study ${this.course}`);
+// };
+
+// const jay = Object.create(StudentProto);
+// jay.init("Jay", 2010, "Cse");
+// jay.introduce();
+
+// Public field
+// Private field
+// Public method
+// Private method
+
+class Account {
+  // Public fields (instance)
+  locale = navigator.language;
+  // _movements = [];
+
+  // Private fields (instances)
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    // protected property
+    this.#pin = pin;
+    // this._movements = [];
+    // this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${owner}`);
+  }
+
+  // Public Methods
+  // Public interface
+
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposits(val) {
+    this.#movements.push(val);
+  }
+
+  withdraw(val) {
+    this.deposits(-val);
+  }
+
+  #approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this.#approveLoan(val)) {
+      this.deposits(val);
+      console.log(`Loan approved`);
+    }
+  }
+
+  static helper(){
+    console.log('Helper');
+  }
+
+  // Private methods
+  #approveLoan(val) {
+    return true;
+  }
+}
+
+const acc1 = new Account("Jonas", "EUR", 1111);
+console.log(acc1);
+
+// acc1.movements.push(250);
+// acc1.movements.push(-140);
+
+//data privacy
+
+acc1.deposits(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+// acc1.approveLoan(1000);
+console.log(acc1.getMovements());
+console.log(acc1);
+console.log(acc1.pin);
+
+// console.log(acc1.#movements);
+
+Account.helper();
+
+//chaining
+acc1.deposits(300).deposits(500).withdraw(35).requestLoan(25000).withdraw(4000);
+console.log(acc1.getMovements);
